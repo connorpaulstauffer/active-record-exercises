@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
            foreign_key: :student_id,
            primary_key: :id,
            class_name: :Enrollment
+
   has_many :enrolled_courses, through: :enrollments, source: :course
 
   has_many :taught_courses,
@@ -20,5 +21,8 @@ class User < ActiveRecord::Base
            primary_key: :id,
            class_name: :Course
 
-           
+  has_many :taught_students, through: :taught_courses, source: :enrolled_students
+
+  has_many :prerequisites, through: :enrolled_courses, source: :prerequisite
+
 end
